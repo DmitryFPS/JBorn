@@ -7,7 +7,7 @@ build/
 !**/src/test/**
 
 ### IntelliJ IDEA ###
-.idea/*
+.idea
 !.idea/encodings.xml
 *.iws
 *.iml
@@ -16,3 +16,4 @@ out/
 
 ### VS Code ###
 .vscode/
+.gitignore
