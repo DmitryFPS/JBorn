@@ -34,14 +34,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> selectTransactionsByClient(User client) {
-        List<Transaction> list = entityManager.createQuery("" +
+        return entityManager.createQuery("" +
                         "select t from Transaction_ as t " +
                         "join t.type as tt " +
                         "join tt.client as cl " +
-                        "where cl.id=:clientId", Transaction.class)
+                        "where cl.id=:clientId ", Transaction.class)
                 .setParameter("clientId", client.getId())
                 .getResultList();
-        return list;
     }
 
     private void transferFunds(Long amount, BankAccount toAccId) {

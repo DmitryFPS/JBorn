@@ -6,9 +6,9 @@
         <collection id="transactionsDc"
                     class="com.company.progectjborn.entity.Transaction">
             <fetchPlan extends="_base">
-                <property name="fromAccId" fetch="JOIN" fetchPlan="_base"/>
-                <property name="toAccId" fetch="JOIN" fetchPlan="_base"/>
-                <property name="type" fetch="JOIN" fetchPlan="_base"/>
+                <property name="fromAccId" fetchPlan="_base"/>
+                <property name="toAccId" fetchPlan="_base"/>
+                <property name="type" fetchPlan="_base"/>
             </fetchPlan>
         </collection>
     </data>
