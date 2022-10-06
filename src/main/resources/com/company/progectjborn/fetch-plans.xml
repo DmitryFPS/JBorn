@@ -4,9 +4,10 @@
     </fetchPlan>
     <fetchPlan entity="Client" name="client-fetch-plan" extends="_base"/>
     <fetchPlan entity="Transaction_" name="transaction-fetch-plan" extends="_base">
-        <property name="fromAccId" fetch="JOIN" fetchPlan="_base"/>
-        <property name="toAccId" fetch="JOIN" fetchPlan="_base"/>
-        <property name="type" fetch="JOIN" fetchPlan="_base"/>
+        <property name="fromAccId" fetchPlan="_base" fetch="JOIN"/>
+        <property name="toAccId" fetchPlan="_base" fetch="JOIN"/>
+        <property name="type" fetchPlan="_base" fetch="JOIN">
+        </property>
     </fetchPlan>
     <fetchPlan entity="Type_" name="type-fetch-plan" extends="_base">
         <property name="client" fetch="JOIN" fetchPlan="_base"/>
