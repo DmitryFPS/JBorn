@@ -9,6 +9,7 @@
               caption="msg://com.company.progectjborn.screen.bankaccount/bankAccountBrowse.menu"/>
         <item screen="Transaction_.browse"
               caption="msg://com.company.progectjborn.screen.transaction/transactionBrowse.menu"/>
+        <item screen="Report.browse" caption="msg://com.company.progectjborn.screen.report/reportBrowse.menu"/>
     </menu>
 
 </menu-config>

@@ -1,16 +1,20 @@
 <fetchPlans xmlns="http://jmix.io/schema/core/fetch-plans">
     <fetchPlan entity="BankAccount" name="bankAccount-fetch-plan" extends="_base">
-        <property name="client" fetch="JOIN" fetchPlan="_base"/>
+        <property name="client" fetch="JOIN" fetchPlan="user-fetch-plan"/>
     </fetchPlan>
     <fetchPlan entity="Client" name="client-fetch-plan" extends="_base"/>
     <fetchPlan entity="Transaction_" name="transaction-fetch-plan" extends="_base">
-        <property name="fromAccId" fetchPlan="_base" fetch="JOIN"/>
-        <property name="toAccId" fetchPlan="_base" fetch="JOIN"/>
-        <property name="type" fetchPlan="_base" fetch="JOIN">
+        <property name="fromAccId" fetchPlan="bankAccount-fetch-plan" fetch="JOIN"/>
+        <property name="toAccId" fetchPlan="bankAccount-fetch-plan" fetch="JOIN"/>
+        <property name="type" fetchPlan="type-fetch-plan" fetch="JOIN">
         </property>
     </fetchPlan>
     <fetchPlan entity="Type_" name="type-fetch-plan" extends="_base">
-        <property name="client" fetch="JOIN" fetchPlan="_base"/>
+        <property name="client" fetch="JOIN" fetchPlan="user-fetch-plan"/>
     </fetchPlan>
     <fetchPlan entity="User" name="user-fetch-plan" extends="_base"/>
+    <fetchPlan entity="Report" name="report-fetch-plan" extends="_base">
+        <property name="type" fetch="JOIN" fetchPlan="type-fetch-plan">
+        </property>
+    </fetchPlan>
 </fetchPlans>
