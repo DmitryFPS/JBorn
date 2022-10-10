@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://reportBrowse.caption"
+        focusComponent="reportsTable">
+    <data readOnly="true">
+        <collection id="transactionDc" class="com.company.progectjborn.entity.Transaction">
+            <fetchPlan extends="_base">
+                <property name="fromAccId" fetch="JOIN" fetchPlan="_base"/>
+                <property name="toAccId" fetch="JOIN" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="transactionDl">
+                <query>
+                    <![CDATA[select t from Transaction_ as t
+                                join t.type as ty
+                                join ty.client as cl
+                             where cl =:client and ty =:type and t.createDate between :startDate and :endDate]]>
+                </query>
+            </loader>
+        </collection>
+        <instance id="reportsInstDc" class="com.company.progectjborn.entity.Report">
+            <fetchPlan extends="_base">
+                <property name="type" fetch="JOIN" fetchPlan="_base"/>
+            </fetchPlan>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="reportsTable" spacing="true">
+        <form id="form" dataContainer="reportsInstDc">
+            <dateField id="startDate" property="startDate"/>
+            <dateField id="endDate" property="endDate"/>
+            <entityPicker id="type" property="type"/>
+        </form>
+        <button id="clickReportOk" caption="Сформировать отчет"/>
+        <groupTable id="reportsTable"
+                    width="100%"
+                    dataContainer="transactionDc">
+            <columns>
+                <column id="createDate"/>
+                <column id="fromAccId"/>
+                <column id="toAccId"/>
+                <column id="transferAmount"/>
+            </columns>
+            <simplePagination/>
+        </groupTable>
+    </layout>
+</window>

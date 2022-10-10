@@ -36,12 +36,12 @@ public class Transaction {
 
     @JoinColumn(name = "FROM_ACC_ID_ID")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinFetch(value = JoinFetchType.INNER)
+    @JoinFetch(value = JoinFetchType.OUTER)
     private BankAccount fromAccId;
 
     @JoinColumn(name = "TO_ACC_ID_ID")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinFetch(value = JoinFetchType.INNER)
+    @JoinFetch(value = JoinFetchType.OUTER)
     private BankAccount toAccId;
 
     @JoinTable(name = "TRANSACTION_TYPE_LINK",

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
         caption="msg://bankAccountBrowse.caption"
         focusComponent="bankAccountsTable">
     <data readOnly="true">
         <collection id="bankAccountsDc"
                     class="com.company.progectjborn.entity.BankAccount">
             <fetchPlan extends="_base"/>
+            <loader id="bankAccountsDl">
+                <query>
+                    <![CDATA[select ba from BankAccount as ba join ba.client as cl]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>cl =:client</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
         </collection>
     </data>
     <facets>

@@ -20,6 +20,20 @@
         </createTable>
     </changeSet>
     <changeSet id="2" author="progectJBorn">
+        <createTable tableName="REPORT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_REPORT"/>
+            </column>
+            <column name="START_DATE" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="progectJBorn">
         <createTable tableName="TRANSACTION_">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TRANSACTION_"/>
@@ -34,7 +48,7 @@
             <column name="TO_ACC_ID_ID" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="3" author="progectJBorn">
+    <changeSet id="4" author="progectJBorn">
         <createTable tableName="TRANSACTION_TYPE_LINK">
             <column name="TRANSACTION_ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TRANSACTION_TYPE_LINK"/>
@@ -44,7 +58,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="4" author="progectJBorn">
+    <changeSet id="5" author="progectJBorn">
         <createTable tableName="TYPE_">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TYPE_"/>
@@ -55,7 +69,7 @@
             <column name="CLIENT_ID" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="5" author="progectJBorn">
+    <changeSet id="6" author="progectJBorn">
         <addColumn tableName="USER_">
             <column name="DTYPE" type="VARCHAR(31)"/>
         </addColumn>
@@ -65,7 +79,7 @@
             <where>DTYPE is null</where>
         </update>
     </changeSet>
-    <changeSet id="6" author="progectJBorn">
+    <changeSet id="7" author="progectJBorn">
         <createIndex indexName="IDX_BANK_ACCOUNT_CLIENT" tableName="BANK_ACCOUNT">
             <column name="CLIENT_ID"/>
         </createIndex>
@@ -74,7 +88,15 @@
                                  constraintName="FK_BANK_ACCOUNT_ON_CLIENT" referencedColumnNames="ID"
                                  referencedTableName="USER_"/>
     </changeSet>
-    <changeSet id="7" author="progectJBorn">
+    <changeSet id="8" author="progectJBorn">
+        <createIndex indexName="IDX_REPORT_TYPE" tableName="REPORT">
+            <column name="TYPE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="TYPE_ID" baseTableName="REPORT" constraintName="FK_REPORT_ON_TYPE"
+                                 referencedColumnNames="ID" referencedTableName="TYPE_"/>
+    </changeSet>
+    <changeSet id="9" author="progectJBorn">
         <createIndex indexName="IDX_TRANSACTION__FROM_ACC_ID" tableName="TRANSACTION_">
             <column name="FROM_ACC_ID_ID"/>
         </createIndex>
@@ -83,7 +105,7 @@
                                  constraintName="FK_TRANSACTION__ON_FROM_ACC_ID" referencedColumnNames="ID"
                                  referencedTableName="BANK_ACCOUNT"/>
     </changeSet>
-    <changeSet id="8" author="progectJBorn">
+    <changeSet id="10" author="progectJBorn">
         <createIndex indexName="IDX_TRANSACTION__TO_ACC_ID" tableName="TRANSACTION_">
             <column name="TO_ACC_ID_ID"/>
         </createIndex>
@@ -92,7 +114,7 @@
                                  constraintName="FK_TRANSACTION__ON_TO_ACC_ID" referencedColumnNames="ID"
                                  referencedTableName="BANK_ACCOUNT"/>
     </changeSet>
-    <changeSet id="9" author="progectJBorn">
+    <changeSet id="11" author="progectJBorn">
         <createIndex indexName="IDX_TYPE__CLIENT" tableName="TYPE_">
             <column name="CLIENT_ID"/>
         </createIndex>
@@ -100,12 +122,12 @@
         <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="TYPE_" constraintName="FK_TYPE__ON_CLIENT"
                                  referencedColumnNames="ID" referencedTableName="USER_"/>
     </changeSet>
-    <changeSet id="10" author="progectJBorn">
+    <changeSet id="12" author="progectJBorn">
         <addForeignKeyConstraint baseColumnNames="TRANSACTION_ID" baseTableName="TRANSACTION_TYPE_LINK"
                                  constraintName="FK_TRATYP_ON_TRANSACTION" referencedColumnNames="ID"
                                  referencedTableName="TRANSACTION_"/>
     </changeSet>
-    <changeSet id="11" author="progectJBorn">
+    <changeSet id="13" author="progectJBorn">
         <addForeignKeyConstraint baseColumnNames="TYPE_ID" baseTableName="TRANSACTION_TYPE_LINK"
                                  constraintName="FK_TRATYP_ON_TYPE" referencedColumnNames="ID"
                                  referencedTableName="TYPE_"/>

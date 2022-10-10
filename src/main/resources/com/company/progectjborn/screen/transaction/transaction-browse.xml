@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
         caption="msg://transactionBrowse.caption"
         focusComponent="transactionsTable">
     <data readOnly="true">
@@ -10,6 +11,16 @@
                 <property name="toAccId" fetch="JOIN" fetchPlan="_base"/>
                 <property name="type" fetch="JOIN" fetchPlan="_base"/>
             </fetchPlan>
+            <loader id="transactionsDl">
+                <query>
+                    <![CDATA[select tr from Transaction_ tr join tr.type as ty join ty.client as cl]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>cl =:client</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
         </collection>
     </data>
     <facets>
@@ -29,6 +40,10 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="transactionsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="transactionsDl">
+            <properties include=".*"/>
+        </filter>
         <groupTable id="transactionsTable"
                     width="100%"
                     dataContainer="transactionsDc">
