@@ -2,17 +2,12 @@ package com.company.progectjborn.ServiceImpl;
 
 import com.company.progectjborn.Service.TransactionService;
 import com.company.progectjborn.entity.BankAccount;
-import com.company.progectjborn.entity.Transaction;
-import com.company.progectjborn.entity.Type;
-import com.company.progectjborn.entity.User;
 import com.company.progectjborn.exception.CustomException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -32,22 +27,6 @@ public class TransactionServiceImpl implements TransactionService {
         } else {
             withdrawFunds(amount, fromAccId);
         }
-    }
-
-    @Override
-    public List<Transaction> getTransaction(User client, Type type, Date startDate, Date endDate) {
-        return entityManager.createQuery(
-                        "select t " +
-                                "from Transaction_ as t " +
-                                "join t.type as ty " +
-                                "join ty.client as cl " +
-                                "where cl =:client and t.type =:type and t.createDate between :startDate and :endDate ",
-                        Transaction.class)
-                .setParameter("client", client)
-                .setParameter("type", type)
-                .setParameter("startDate", startDate)
-                .setParameter("endDate", endDate)
-                .getResultList();
     }
 
     private void transferFunds(Long amount, BankAccount toAccId) {

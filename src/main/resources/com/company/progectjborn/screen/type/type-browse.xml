@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
         caption="msg://typeBrowse.caption"
         focusComponent="typesTable">
     <data readOnly="true">
         <collection id="typesDc"
                     class="com.company.progectjborn.entity.Type">
             <fetchPlan extends="_base"/>
+            <loader id="typesDl">
+                <query>
+                    <![CDATA[select t from Type_ as t join t.client as cl]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>cl =:client</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
         </collection>
     </data>
     <facets>

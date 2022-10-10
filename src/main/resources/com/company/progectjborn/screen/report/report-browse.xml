@@ -8,8 +8,15 @@
                 <property name="fromAccId" fetch="JOIN" fetchPlan="_base"/>
                 <property name="toAccId" fetch="JOIN" fetchPlan="_base"/>
             </fetchPlan>
+            <loader id="transactionDl">
+                <query>
+                    <![CDATA[select t from Transaction_ as t
+                                join t.type as ty
+                                join ty.client as cl
+                             where cl =:client and ty =:type and t.createDate between :startDate and :endDate]]>
+                </query>
+            </loader>
         </collection>
-
         <instance id="reportsInstDc" class="com.company.progectjborn.entity.Report">
             <fetchPlan extends="_base">
                 <property name="type" fetch="JOIN" fetchPlan="_base"/>

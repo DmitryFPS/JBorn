@@ -3,8 +3,6 @@ package com.company.progectjborn.entity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
-import org.eclipse.persistence.annotations.JoinFetch;
-import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -32,7 +30,7 @@ public class Report {
 
     @JoinColumn(name = "TYPE_ID")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinFetch(value = JoinFetchType.INNER)
+//    @JoinFetch(value = JoinFetchType.INNER)
     private Type type;
 
     public Type getType() {
